@@ -1,4 +1,4 @@
-data <- read.csv2("results-survey111545.csv", sep = ";", header = TRUE)
+data <- read.csv2("./../results-survey111545.csv", sep = ";", header = TRUE)
 data <- data[ , c(1:2,8:24, 26,38:42,46)] 
 length(names(data))
 names(data)[1]<-"ID_Reponse"

@@ -6,28 +6,43 @@
 # 
 #    http://shiny.rstudio.com/
 #
-library(rsconnect)
-rsconnect::deployApp('C:/Users/halim/OneDrive/Documents/Cours/M2/visu/Projet/Visu_Information/Survey_Students_MIASHS')
+#library(rsconnect)
+#rsconnect::deployApp('C:/Users/halim/OneDrive/Documents/Cours/M2/visu/Projet/Visu_Information/Survey_Students_MIASHS/rsconnect/shinyapps.io/visupromomiash')
+
+library(ggplot2)
 library(leaflet)
 library(r2d3)
 library(shiny)
 
+
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  
   # Application title
   titlePanel("Old Faithful Geyser Data"),
-  
   # Sidebar with a slider input for number of bins 
-  sliderInput( inputId = "num"
-                 ,label = "Choose a number" 
-                 ,value = 25
-                 ,min = 1
-                 ,max = 100
+  
+  sliderInput( inputId = "num",
+                 label = "Choose a number" ,
+                 value = 25,
+                 min = 1,
+                 max = 100
                 ),
-  textInput(inputId = "txt",label ="Write a title")
-  , plotOutput("hist")
-  ,verbatimTextOutput("stat")
+  
+  sliderInput(inputId = "col",
+              label = "Choose a column",
+              value = 1,
+              min = 1,
+              max = 2),
+  
+  
+  textInput(inputId = "txt",
+            label ="Write a title"),  
+  
+  plotOutput("hist"),
+  
+
+
+  verbatimTextOutput("stat")
     )
   )
 
