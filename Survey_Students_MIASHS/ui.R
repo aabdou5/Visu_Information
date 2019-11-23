@@ -6,6 +6,8 @@
 # 
 #    http://shiny.rstudio.com/
 #
+library(rsconnect)
+rsconnect::deployApp('C:/Users/halim/OneDrive/Documents/Cours/M2/visu/Projet/Visu_Information/Survey_Students_MIASHS')
 library(leaflet)
 library(r2d3)
 library(shiny)
@@ -22,8 +24,10 @@ shinyUI(fluidPage(
                  ,value = 25
                  ,min = 1
                  ,max = 100
-                )
+                ),
+  textInput(inputId = "txt",label ="Write a title")
   , plotOutput("hist")
+  ,verbatimTextOutput("stat")
     )
   )
 

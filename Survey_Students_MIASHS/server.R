@@ -11,7 +11,18 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-  output$hist <- renderPlot({hist(rnorm(100))})
+  
+  data <- reactive({rnorm(input$num)})
+  
+  output$hist <- renderPlot({
+    hist( rnorm( data() )
+          ,main = input$txt)
+     
+  })
+  
+  output$stats <- renderPrint({
+    summary( rnorm( data() ) )
+    })
     
   }
 )
