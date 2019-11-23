@@ -11,7 +11,7 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-   
+  output$hist <- renderPlot({hist(rnorm(100))})
     
   }
 )
