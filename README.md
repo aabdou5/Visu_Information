@@ -5,4 +5,4 @@ Ce projet est un exercise de Visualisation de Données
 
 Les technologies utilisées sont RShiny, D3, Leaflet
 
-L'objectif est, à partir d'un jeu de données, proposez 3 visualisations de données pertinentes.
+L'objectif est, à partir d'un jeu de données, proposez 3 visualisations pertinentes.
