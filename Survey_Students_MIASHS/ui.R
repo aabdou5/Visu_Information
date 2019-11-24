@@ -41,12 +41,16 @@ shinyUI(fluidPage(
               ),
   
   
-  textInput(inputId = "txt",
-            label ="Write a title"),  
+  #textInput(inputId = "txt",
+   #         label ="Write a title"),  
   
-  plotOutput("hist"),
-
-  verbatimTextOutput("stat")
+  plotOutput("hist", width = 400, height = 400),
+  
+  h3("Où vont les MIASHS vont en période d'alternance ?"),
+  
+  leafletOutput("carte", width = 400, height = 400)
+  
+  #verbatimTextOutput("stat")
     )
   )
 
