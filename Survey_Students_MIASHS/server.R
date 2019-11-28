@@ -41,18 +41,43 @@ data_Nettoyer$ALTERNANCE_LONG= apply(data_Nettoyer,1,FUN=function(x){ long(x["VI
 data_Nettoyer$ALTERNANCE_LAT= apply(data_Nettoyer,1,FUN=function(x){  lat(x["VILLE_ALTERNANCE"] )})
 
 
-leaflet(data = data_Nettoyer) %>% addTiles() %>%
-  addMarkers(~ALTERNANCE_LONG, ~ALTERNANCE_LAT)
+#leaflet(data = data_Nettoyer) %>% addTiles() %>%
+#  addMarkers(~ALTERNANCE_LONG, ~ALTERNANCE_LAT)
 
-corpus <- Corpus(VectorSource(data_Nettoyer$"RAISON_INSCRIPTION_PROJET-PRECIS"))
+
+corpus <- Corpus(VectorSource(data_Nettoyer$ROLE_ENTREPRISE))
 
 corpus <- tm_map(corpus, removePunctuation)
+
+to_e <- content_transformer(function (x , pattern ) gsub(pattern, "e", x))
+
+to_i <- content_transformer(function (x , pattern ) gsub(pattern, "i", x))
+
+to_a <- content_transformer(function (x , pattern ) gsub(pattern, "a", x))
+
+corpus<- tm_map(corpus, to_e, "Ã©")
+
+corpus<- tm_map(corpus, to_e, "Ã¨")
+
+corpus<- tm_map(corpus, to_e, "Ãª")
+
+corpus<- tm_map(corpus, to_i, "Ã®")
+
+corpus<- tm_map(corpus, to_a, "Ã¢")
+
+corpus<- tm_map(corpus, to_a, "Ã")
+
+corpus<-tm_map(corpus, removePunctuation)
+
+corpus <- tm_map(corpus, function(x)removeWords(x,stopwords(kind = "fr")))
+
+#inspect(corpus)
 
 tdm <-TermDocumentMatrix(corpus, control=list(wordLengths=c(1,Inf)))
 freq <- slam::row_sums(tdm)
 words <- names(freq)    
 
-##wordcloud(words, freq, min.freq=1)
+#wordcloud(words, freq, min.freq=1,random.color = TRUE)
 
 # Define server logic required to draw a histogram
 
@@ -76,6 +101,12 @@ shinyServer(function(input, output) {
       geom_bar()+
       xlab(input$col)
       })
+  
+  output$wrdcld<- renderPlot({
+    wordcloud(corpus, scale=c(4,0.5),
+                  min.freq = input$num,
+                  colors=brewer.pal(8, "Dark2"))
+  })
   
   output$carte <- renderLeaflet({
     leaflet(data = data_Nettoyer) %>%

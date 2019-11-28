@@ -25,14 +25,9 @@ shinyUI(fluidPage(
   titlePanel("Projet Visualisation"),
   # Sidebar with a slider input for number of bins 
   
-  #sliderInput( inputId = "num",
-                # label = "Choose a number" ,
-               #  value = 25,
-               #  min = 1,
-               #  max = 100
-               # ),
+  # Barplot
   
-  h3("La répartition des sexes selon les promotions"),
+  h3("La répartition des sexes et des promotions"),
   
   selectInput(inputId="col", 
               label = "Choose a variable to display",
@@ -41,11 +36,23 @@ shinyUI(fluidPage(
               selected = "Promotion"
               ),
   
-  
   #textInput(inputId = "txt",
    #         label ="Write a title"),  
   
+  #Map
+  
   plotOutput("hist", width = 400, height = 400),
+  
+  #Cloudwords
+  
+  sliderInput( inputId = "num",
+               label = "Les attentes du master MIASHS" ,
+               value = 1,
+               min = 1,
+               max = 3
+  ),
+  
+  plotOutput("wrdcld"),
   
   h3("Où les MIASHS ont-ils décrouché leurs premiers sésames (Baccalauréat ou equivalent) ?"),
   
