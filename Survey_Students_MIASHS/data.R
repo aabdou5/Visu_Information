@@ -28,3 +28,16 @@ data_Nettoyer$ALTERNANCE_LAT= apply(data_Nettoyer,1,FUN=function(x){  lat(x["VIL
 leaflet(data = data_Nettoyer) %>% addTiles() %>%
   addMarkers(~ALTERNANCE_LONG, ~ALTERNANCE_LAT)
 
+
+# make some fake data
+df <- data.frame(
+  'level1'=c('a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'c'), 
+  'level2'=c('a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'c1', 'c2', 'c3'), 
+  'value'=c(.025, .05, .027, .005, .012, .014, .1, .03, .18))
+
+# sunburst plot
+ggplot(df, aes(y=value)) +
+  geom_bar(aes(fill=level1, x=0), width=.5, stat='identity') + 
+  geom_bar(aes(fill=level2, x=.25), width=.25, stat='identity') + 
+  coord_polar(theta='y')
+

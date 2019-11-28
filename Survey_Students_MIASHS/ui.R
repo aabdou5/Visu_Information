@@ -1,4 +1,5 @@
-#
+#### Baco-Mahadali Youssouf, Abdou Anlimou, Taha Elkarafli
+
 # This is the user-interface definition of a Shiny web application. You can
 # run the application by clicking 'Run App' above.
 #
@@ -24,12 +25,12 @@ shinyUI(fluidPage(
   titlePanel("Projet Visualisation"),
   # Sidebar with a slider input for number of bins 
   
-  sliderInput( inputId = "num",
-                 label = "Choose a number" ,
-                 value = 25,
-                 min = 1,
-                 max = 100
-                ),
+  #sliderInput( inputId = "num",
+                # label = "Choose a number" ,
+               #  value = 25,
+               #  min = 1,
+               #  max = 100
+               # ),
   
   h3("La répartition des sexes selon les promotions"),
   
@@ -46,11 +47,13 @@ shinyUI(fluidPage(
   
   plotOutput("hist", width = 400, height = 400),
   
-  h3("Où vont les MIASHS vont en période d'alternance ?"),
+  h3("Où les MIASHS ont-ils décrouché leurs premiers sésames (Baccalauréat ou equivalent) ?"),
   
   leafletOutput("carte", width = 400, height = 400)
   
   #verbatimTextOutput("stat")
     )
   )
+
+
 

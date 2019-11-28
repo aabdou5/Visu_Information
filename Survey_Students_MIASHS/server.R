@@ -1,4 +1,5 @@
-#
+#### Baco-Mahadali Youssouf, Abdou Anlimou, Taha Elkarafli
+
 # This is the server logic of a Shiny web application. You can run the 
 # application by clicking 'Run App' above.
 #
@@ -59,18 +60,29 @@ words <- names(freq)
 shinyServer(function(input, output) {
   
   data <- reactive({rnorm(input$num)})
+  
                  
   
   output$hist <- renderPlot({
     ggplot(data_Nettoyer, 
-           aes(x= switch(input$col,"Sexe" = SEXE, "Promotion" = PROMOTION)))+
-      geom_bar()
+           aes(
+             x= switch(
+             input$col,
+             "Sexe" = SEXE,
+             "Promotion" = PROMOTION
+             )
+             )
+           )+
+      geom_bar()+
+      xlab(input$col)
       })
   
   output$carte <- renderLeaflet({
     leaflet(data = data_Nettoyer) %>%
       addTiles() %>%
-      addMarkers(~ALTERNANCE_LONG, ~ALTERNANCE_LAT)
+      setView(lng = 3.876716, lat = 43.610769, zoom = 1) %>% 
+      addAwesomeMarkers(~BAC_LONG, ~BAC_LAT,
+                 clusterOptions = markerClusterOptions())
   })
   
   #output$stats <- renderPrint({
@@ -79,3 +91,4 @@ shinyServer(function(input, output) {
     
   }
 )
+
